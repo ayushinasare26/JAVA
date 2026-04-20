@@ -1,0 +1,62 @@
+Problem Definition: Design a Java program to manage student information using inheritance. Create a base class Person that stores common details like name and age. 
+                    Derive a class Student that includes additional attributes such as roll number and marks. Further extend it into another class GraduateStudent with 
+                    specialization details. The program should display complete student information using inherited properties.
+
+Code: 
+
+class Person {   // ------->  Base class
+    String name;
+    int age;
+
+    Person(String name, int age) {   // ------->  Constructor
+        this.name = name;
+        this.age = age;
+    }
+
+    void displayPerson() {    // ------->  Method to display person details
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+class Student extends Person {    // ------->  Derived class
+    int rollNo;
+    double marks;
+
+    Student(String name, int age, int rollNo, double marks) {    // ------->  Constructor
+        super(name, age);   // ------->  calling parent class constructor
+        this.rollNo = rollNo;
+        this.marks = marks;
+    }
+
+    void displayStudent() {    // ------->  Method to display student details
+        displayPerson();   // ------->  calling parent class method
+        System.out.println("Roll Number: " + rollNo);
+        System.out.println("Marks: " + marks);
+    }
+}
+
+class GraduateStudent extends Student {    // ------->  Derived class from Student
+    String specialization;
+
+    GraduateStudent(String name, int age, int rollNo, double marks, String specialization) {    // ------->  Constructor
+        super(name, age, rollNo, marks);
+        this.specialization = specialization;
+    }
+
+    void displayGraduateStudent() {    // ------->  Method to display graduate student details
+        displayStudent();   // ------->  calling parent class method
+        System.out.println("Specialization: " + specialization);
+    }
+}
+
+public class Main {    // ------->  Main class
+    public static void main(String[] args) {
+
+        GraduateStudent g1 = new GraduateStudent(    // ------->  Creating object of GraduateStudent
+                "Ayushi", 21, 101, 88.5, "Computer Science");
+
+        System.out.println("Student Details:");
+        g1.displayGraduateStudent();
+    }
+}
