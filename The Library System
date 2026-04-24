@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class LibrarySystem {
+    
+    private ArrayList<Book> inventory = new ArrayList<>();
+
+    // 1. Add a new book
+    public void addBook(String title, String author) {
+        inventory.add(new Book(title, author));
+        System.out.println("Book added successfully!");
+    }
+
+    // 2. Remove a book (by Title)
+    public void removeBook(String title) {
+        boolean removed = inventory.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
+        if (removed) {
+            System.out.println("Book '" + title + "' has been issued/removed.");
+        } else {
+            System.out.println("Book not found.");
+        }
+    }
+
+    // 3. Search for a book
+    public void searchBook(String title) {
+        for (Book book : inventory) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                System.out.println("Found: " + book);
+                return;
+            }
+        }
+        System.out.println("Sorry, that book is not in our records.");
+    }
+
+    // 4. Display all books
+    public void displayBooks() {
+        if (inventory.isEmpty()) {
+            System.out.println("The library is currently empty.");
+        } else {
+            System.out.println("\n--- Current Library Inventory ---");
+            inventory.forEach(System.out::println);
+        }
+    }
+
+    public static void main(String[] args) {
+        LibrarySystem myLibrary = new LibrarySystem();
+        
+    
+        myLibrary.addBook("The Great Gatsby", "F. Scott Fitzgerald");
+        myLibrary.addBook("1984", "George Orwell");
+        myLibrary.addBook("The Hobbit", "J.R.R. Tolkien");
+
+        myLibrary.displayBooks();
+        
+        System.out.println("\nSearching for '1984'...");
+        myLibrary.searchBook("1984");
+
+        System.out.println("\nRemoving 'The Great Gatsby'...");
+        myLibrary.removeBook("The Great Gatsby");
+
+        myLibrary.displayBooks();
+    }
+}
